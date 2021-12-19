@@ -14,10 +14,42 @@ You can install the package via composer:
 composer require kaiyum2012/socialite-auth
 ```
 
-## Usage
+Laravel without auto-discovery:
+If you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
 
+```base
+Kaiyum2012\SocialiteAuth\SocialiteAuthServiceProvider::class,
+```
+
+## Usage
+SET following `env` variables.
 ```php
-// Usage description here
+SOCIAL_AUTH=true
+SOCIAL_AUTH_PROVIDERS= #e.g. github|facebook|google|twitter
+SOCIAL_AUTH_ROUTE=/auth/social
+SOCIAL_AUTH_CALLBACK=/auth/social/callback
+
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+GITHUB_AUTH_CALLBACK= #example: https://finance.local/auth/social/callback/github
+
+GOOGLE_CLIENT_ID= #
+GOOGLE_CLIENT_SECRET= #
+GOOGLE_REDIRECT= #example: https://finance.local/auth/social/callback/google
+```
+
+set URLs as following:
+####Auth Route
+```php 
+route('socialite-auth.route',{'provider':{provider}})
+# {provider} = github|google
+# e.g route('socialite-auth.route',{'provider':'github'})
+```
+####Callback Route
+```php
+route('socialite-auth.callback',{'provider':{provider}})
+# {provider} = github|google
+# e.g route('socialite-auth.callback',{'provider':'github'})
 ```
 
 ### Testing
